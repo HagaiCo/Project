@@ -1,3 +1,7 @@
+package Model;
+
+import Model.product;
+
 import java.util.ArrayList;
 
 public class retail extends  account
@@ -5,7 +9,7 @@ public class retail extends  account
     private user_id id; //קריאה לקלאס של user_id לקבלת id חדש
     private String retail_name; // שם החברה
     private Integer branch_num; //מספר הסניפים
-    private branch branch; //הגדרת הסניף של המשתמש החדש
+    private Model.branch branch; //הגדרת הסניף של המשתמש החדש
     private retail_org retail_org; //שייוך המשתמש לחברה
     private static ArrayList<retail_org> retail_org_list = new ArrayList<retail_org>();//מערך רשימה של החברות הגדולות מתבצע פה כי כאן זו נקודת בניים לפני ואחרי שכל אירגון נוצר
 
@@ -33,7 +37,7 @@ public class retail extends  account
             while(retail_org_list.get(i).getRetail_name()!=retail_name)
                 count++;
             if(count==retail_org_list.size())
-                this.retail_org=new retail_org (retail_name);
+                this.retail_org=new retail_org(retail_name);
             else
                 this.retail_org=retail_org_list.get(i);
         }

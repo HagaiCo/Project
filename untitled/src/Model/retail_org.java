@@ -1,3 +1,8 @@
+package Model;
+
+import Model.branch;
+import Model.company_id;
+
 import java.util.ArrayList;
 
 public class retail_org

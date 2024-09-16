@@ -1,8 +1,12 @@
 package viewer;
 
+import DButills.DBcollection;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Register_page
         extends JFrame
@@ -18,9 +22,7 @@ public class Register_page
     private JLabel mno;
     private JTextField tmno;
     private JLabel gender;
-    private JRadioButton male;
-    private JRadioButton female;
-    private ButtonGroup gengp;
+    private JTextField Email;
     private JLabel dob;
     private JComboBox date;
     private JComboBox month;
@@ -33,6 +35,12 @@ public class Register_page
     private JTextArea tout;
     private JLabel res;
     private JTextArea resadd;
+    private String strname;
+    private String strpass;
+    private String strphone;
+    private String straddress;
+    private String stremail;
+    private String strbirth;
 
     private String dates[]
             = { "1", "2", "3", "4", "5",
@@ -114,29 +122,19 @@ public class Register_page
         tmno.setText("05");
         c.add(tmno);
 
-        gender = new JLabel("Gender");
+        gender = new JLabel("Email");
         gender.setFont(new Font("Arial", Font.PLAIN, 20));
         gender.setSize(100, 20);
         gender.setLocation(100, 250);
         c.add(gender);
 
-        male = new JRadioButton("Male");
-        male.setFont(new Font("Arial", Font.PLAIN, 15));
-        male.setSelected(true);
-        male.setSize(75, 20);
-        male.setLocation(200, 250);
-        c.add(male);
+        Email = new JTextField();
+        Email.setFont(new Font("Arial", Font.PLAIN, 15));
+        Email.setSize(200, 20);
+        Email.setLocation(200, 250);
+        Email.setText("example@address.com");
+        c.add(Email);
 
-        female = new JRadioButton("Female");
-        female.setFont(new Font("Arial", Font.PLAIN, 15));
-        female.setSelected(false);
-        female.setSize(80, 20);
-        female.setLocation(275, 250);
-        c.add(female);
-
-        gengp = new ButtonGroup();
-        gengp.add(male);
-        gengp.add(female);
 
         dob = new JLabel("DOB");
         dob.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -227,18 +225,17 @@ public class Register_page
     {
         if (e.getSource() == sub) {
             if (term.isSelected()) {
-                String data1;
+
                 String data
                         = "Name : "
                         + tname.getText() + "\n"
+                        +"Password : "
+                        + password.getText() + "\n"
+                        + "Email : "
+                        +Email.getText() + "\n"
                         + "Mobile : "
                         + tmno.getText() + "\n";
-                if (male.isSelected())
-                    data1 = "Gender : Male"
-                            + "\n";
-                else
-                    data1 = "Gender : Female"
-                            + "\n";
+
                 String data2
                         = "DOB : "
                         + (String)date.getSelectedItem()
@@ -247,8 +244,22 @@ public class Register_page
                         + "\n";
 
                 String data3 = "Address : " + tadd.getText();
-                tout.setText(data + data1 + data2 + data3);
+                tout.setText(data + data2 + data3);
                 tout.setEditable(false);
+              DBcollection DB=new DBcollection();//Creating a new DB to Register a new one into the DB
+               strname=tname.getText();
+               strpass=password.getText();
+               strphone=tmno.getText();
+               straddress=tadd.getText();
+               stremail=Email.getText();
+               strbirth=(String)date.getSelectedItem()
+                    + "/" + (String)month.getSelectedItem()
+                      + "/" + (String)year.getSelectedItem();
+                try {
+                    DB.DBregister(strname, strpass, stremail, strphone, strbirth, straddress);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 res.setText("Registration Successfully..");
             }
             else {
@@ -267,6 +278,7 @@ public class Register_page
             password.setText(def);
             res.setText(def);
             tout.setText(def);
+            Email.setText(def);
             term.setSelected(false);
             date.setSelectedIndex(0);
             month.setSelectedIndex(0);

@@ -1,12 +1,8 @@
 package viewer;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import static com.sun.glass.ui.Cursor.setVisible;
-
-public class Log_in extends JFrame {
+public class LogInViewer extends JFrame {
     private JPanel LoginFrame;
     private JPasswordField password;
     private JLabel Label;
@@ -16,9 +12,8 @@ public class Log_in extends JFrame {
     private JLabel pass;
 
 
-    public Log_in() {
+    public LogInViewer() {
         super("Donation-Program");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(300,300,800,500);
         getContentPane().add(LoginFrame);
         setVisible(true);
@@ -26,13 +21,10 @@ public class Log_in extends JFrame {
 
     }
 
-    public JPasswordField getPassword() {
-        return password;
+    public String getPassword() {
+        return password.getText();
     }
-
-    public JTextField getUsername() {
-        return Username;
-    }
+    public String getUsername() { return Username.getText(); }
 
 
     public JButton getRegister() {
@@ -42,6 +34,7 @@ public class Log_in extends JFrame {
     public JButton getLogIn() {
         return LogIn;
     }
+
 
 
 

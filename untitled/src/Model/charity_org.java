@@ -1,3 +1,5 @@
+package Model;
+
 public class charity_org extends account
 {
     private company_id id;//id מזהה חדש של חברה

@@ -1,6 +1,5 @@
 package controller;
 
-import viewer.Log_in;
 import viewer.Register_page;
 import viewer.home_page;
 

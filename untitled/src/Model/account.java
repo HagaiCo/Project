@@ -1,5 +1,8 @@
+
+package Model;
 public class account
 {
+
     private String username;//שם משתמש
     private String password;//סיסמא
     private String phone;//מספר טלפון
